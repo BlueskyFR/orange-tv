@@ -1,3 +1,5 @@
+const localDecoderIP = '192.168.1.33';
+
 var express = require('express');
 var app = express();
 
@@ -124,7 +126,7 @@ async function sendKey(key) {
   let output = "";
   let mappedKey = keyMap[key];
   if (mappedKey)
-    output += await request.get(`http://192.168.1.33:8080/remoteControl/cmd?operation=01&key=${mappedKey}&mode=0`);
+    output += await request.get(`http://${localDecoderIP}:8080/remoteControl/cmd?operation=01&key=${mappedKey}&mode=0`);
 
   return output;
 }
