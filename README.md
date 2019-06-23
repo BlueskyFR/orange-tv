@@ -23,6 +23,9 @@ pm2 start app.js --name orange-tv --watch
 pm2 save
 ```
 
+4. Setup IFTTT! Use the **Google Assistant** module for the **IF** condition and a **webhook** for the **THEN**, specifying an endpoint such as `[your NodeJS server's public IP]/tv/netflix/stateoff`. Your server IP **SHOULD be public** because the IFTTT webhook calls are made from an external server, not from your phone.
+Enjoy!
+
 
 # Documentation
 
@@ -30,11 +33,13 @@ pm2 save
 
 Here are the endpoints:
 
-- `/tv/channel/[X]`: switch to channel `[X]`.
-- `/tv/netflix/[state]`: launch Netflix. `[state]` can be either "**stateon**" or "**stateoff**". If "stateoff" is specified, then the decoder is powered on before launching Netflix.
-- `/tv/on` and `/tv/off`: switch on or off the TV. `/tv/on` also dismiss the main menu after powering up.
-- `/tv/rec`: start the recording of the current programm being watched, adding 20 extra minutes to the default end time.
-- `/tv/infos`: power up the decoder, switch to channel "France 2" and pauses after a couple of seconds (this is intended to be launched a couple of minutes before the TV news).
+Endpoint | Description
+-------- | --------
+`/tv/channel/[X]` | Switch to channel `[X]`
+`/tv/netflix/[state]` | Launch Netflix. `[state]` can be either "**stateon**" or "**stateoff**". If "stateoff" is specified, then the decoder is powered on before launching Netflix.
+`/tv/on` and `/tv/off` | Switch on or off the TV. `/tv/on` also dismiss the main menu after powering up.
+`/tv/rec` | Start the recording of the current programm being watched, adding 20 extra minutes to the default end time.
+`/tv/infos` | Power up the decoder, switch to channel "France 2" and pauses after a couple of seconds (this is intended to be launched a couple of minutes before the TV news).
 
 ## API
 
@@ -44,11 +49,11 @@ Please do note that all the functions are **async**.
 
 # Port forwarding
 
-By default, the port is 8000. If you are launching the app with root privileges or using a process manager, you have to use port forwarding in order to make the app accessible from anywhere without specifying the port to make it default to 80.
-A solution is to use Nginx; here is an example of configuration file you can use to remap the port 80 to 8000:
+**By default, the port is 8000**. If you are launching the app without root privileges or using a process manager, you have to use port forwarding in order to make the app accessible from anywhere without specifying the port to make it default to 80.
+A solution is to use **Nginx**; here is an example of configuration file you can use to **remap the port 80 to 8000**:
 
 `/etc/nginx/nginx.conf`:
-```
+```nginx
 events {
 
 }
